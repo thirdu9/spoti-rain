@@ -1,8 +1,9 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
+from dotenv import load_dotenv
 import os
 
-
+load_dotenv()
 
 scope = "user-read-currently-playing user-read-playback-state user-read-recently-played"
 

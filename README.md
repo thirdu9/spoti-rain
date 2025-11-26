@@ -3,7 +3,10 @@ Fetches user listening data and creates albums, song lists, listening history an
 
 
 ## Instructions
-`pip install -r requirements.txt`
+```
+python -m venv .venv
+pip install -r requirements.txt
+```
 
 
 
