@@ -1,0 +1,6 @@
+spotipy
+sqlalchemy
+pandas
+matplotlib
+seaborn
+schedule
