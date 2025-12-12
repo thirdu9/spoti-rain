@@ -3,12 +3,9 @@ from db import engine, Song, Artist, Album, ListeningHistory, Session
 from datetime import datetime
 
 
-# Session = sessionmaker(bind=engine)
-
 
 def save_song(entry,session):
     print('Saving songs...')
-    session = Session()
     
     with session.no_autoflush:
         song = session.query(Song).filter_by(song_id=entry["song_id"]).first()
@@ -27,13 +24,11 @@ def save_song(entry,session):
             spotify_url=entry["spotify_url"]
         )
         session.add(song)
-        session.commit()
     print('Recent Songs added to database...')
 
 
 def save_artists(entry, session):
-    print('Saving artists data...')
-    session = Session()
+    print('#####Saving artists data...#####')
     artists_dict = entry["artists"]
 
     for artist_data in artists_dict.items():
@@ -51,18 +46,19 @@ def save_artists(entry, session):
                 songs_list=entry["name"],
                 albums_list=entry["album"]
             )
+
             session.add(artist)
-            session.commit()
         else:
             # add song to CSV list if new
             songs = artist.songs_list.split(",") if artist.songs_list else []
             if entry["name"] not in songs:
                 songs.append(entry["name"])
                 artist.songs_list = ",".join(songs)
+                print(f'Song `{entry["name"]}` added to the `{artist_name}\'s` list')
             
             albums = artist.albums_list.split(",") if artist.albums_list else []
             if entry["album"] not in albums:
-                songs.append(entry["album"])
+                albums.append(entry["album"])
                 artist.albums_list = ",".join(albums)
     
     print('Artists data stored....')
@@ -70,8 +66,7 @@ def save_artists(entry, session):
 
 
 def save_album(entry, session):
-    print('Saving Album data...')
-    session = Session()
+    print('#######Saving Album data...#######')
     album_name = entry["album"]
     artists_dict = entry["artists"]
     album_type = entry["album_type"]
@@ -93,12 +88,17 @@ def save_album(entry, session):
             songs_list=entry["name"]
         )
         session.add(album)
-        session.commit()
+
     else:
         songs = album.songs_list.split(",") if album.songs_list else []
+        print(songs)
         if entry["name"] not in songs:
             songs.append(entry["name"])
             album.songs_list = ",".join(songs)
+            print(f"Added new song '{entry['name']}' to album '{album_name}'")
+        else:
+            print(f"Song '{entry['name']}' already exists in album '{album_name}'")
+
 
     print('Album added to database...')
 

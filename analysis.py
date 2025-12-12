@@ -100,9 +100,8 @@ Choose: _"""
         elif choice == 4:
             monthly_trend()
         elif choice == 5:
-            Session.close()
             break
-
         else:
             print("Choose one of the above")
     
+        Session.close()

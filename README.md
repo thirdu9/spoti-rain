@@ -2,6 +2,8 @@
 Fetches user listening data and creates albums, song lists, listening history and analyzes the data for some cool graphs. More features coming soon.
 
 
+# Need to fix the artists `Albums` column!
+
 ## Instructions
 ```
 python -m venv .venv

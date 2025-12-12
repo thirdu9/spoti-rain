@@ -5,7 +5,7 @@ import os
 
 load_dotenv()
 
-scope = "user-read-currently-playing user-read-playback-state user-read-recently-played"
+scope = "user-read-currently-playing user-read-playback-state user-read-recently-played user-library-read"
 
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     client_id=os.getenv('SPOTIPY_CLIENT_ID'),
@@ -54,7 +54,7 @@ def get_recently_played():
         "artists": artist_dict,
         "album": track["album"]["name"],
         "album_id": track["album"]["id"],
-        "album_type": track["album"]["type"],
+        "album_type": track["album"]["album_type"],
         "album_link" : track["album"]["external_urls"]["spotify"],
         "played_at": item["played_at"],
         "duration_ms": track["duration_ms"],
@@ -65,9 +65,9 @@ def get_recently_played():
     return history
 
 if __name__ == '__main__': 
-    print(get_recently_played())
-    # artists = sp.current_user_recently_played(limit=1)['items'][0]['track']['artists']
-
+    print(get_recently_played()[0])
+    # artists = sp.current_user_recently_played(limit=1)['items'][0]['track']['album']
+    # print(artists)
     # artist = {}
     # for a in artists:
     #     artist[a['name']] = a['id']
