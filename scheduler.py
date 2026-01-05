@@ -12,8 +12,8 @@ def job():
     print(f'History synced 🔁....\nLast synced at {datetime.now()}')
 
 def start_scheduler():
-    # schedule.every(3).minutes.do(job)
-    schedule.every(10).seconds.do(job)
+    schedule.every(10).minutes.do(job)
+    # schedule.every(10).seconds.do(job)
 
     print("Scheduler started. Running every 10 minutes...")
 

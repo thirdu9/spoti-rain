@@ -24,6 +24,7 @@ def save_song(entry,session):
             spotify_url=entry["spotify_url"]
         )
         session.add(song)
+        session.flush()
     print('Recent Songs added to database...')
 
 
@@ -48,6 +49,7 @@ def save_artists(entry, session):
             )
 
             session.add(artist)
+            session.flush()
         else:
             # add song to CSV list if new
             songs = artist.songs_list.split(",") if artist.songs_list else []
@@ -88,6 +90,7 @@ def save_album(entry, session):
             songs_list=entry["name"]
         )
         session.add(album)
+        session.flush()
 
     else:
         songs = album.songs_list.split(",") if album.songs_list else []
@@ -150,6 +153,7 @@ def save_history_entries(history_items):
             timestamp_added=datetime.now()
         )
         session.add(hist)
+        session.flush()
     print('Saving History DONE...')
 
     session.commit()

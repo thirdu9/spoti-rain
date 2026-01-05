@@ -5,7 +5,7 @@ import os
 
 load_dotenv()
 
-scope = "user-read-currently-playing user-read-playback-state user-read-recently-played user-library-read"
+scope = "user-read-currently-playing user-read-playback-state user-read-recently-played user-library-read user-read-private"
 
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     client_id=os.getenv('SPOTIPY_CLIENT_ID'),
@@ -64,8 +64,38 @@ def get_recently_played():
     print('Done....')
     return history
 
+
+def get_audio_features(song_id):
+    features = sp.audio_features([song_id])[0]
+
+    if features is None:
+        return None
+
+    return {
+        "song_id": song_id,
+        "danceability": features["danceability"],
+        "energy": features["energy"],
+        "valence": features["valence"],
+        "tempo": features["tempo"],
+        "acousticness": features["acousticness"],
+        "instrumentalness": features["instrumentalness"],
+        "speechiness": features["speechiness"],
+        "liveness": features["liveness"],
+    }
+
+
+
+
+
 if __name__ == '__main__': 
-    print(get_recently_played()[0])
+    # print(get_recently_played()[0])
+    # song_id = '7b6sWLSnbZhSIeqNGrJ4py'
+    # features = sp.audio_features([song_id])[0]
+    # print(features)
+
+    print(sp.audio_features(["7FCfMXYTIiQ9b4hDYs4Iol"]))
+
+    # sp.audi
     # artists = sp.current_user_recently_played(limit=1)['items'][0]['track']['album']
     # print(artists)
     # artist = {}

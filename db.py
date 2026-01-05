@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, String, Integer, DateTime, Text, text
+from sqlalchemy import create_engine, Column, String, Integer, DateTime, Text, text, Float
 from sqlalchemy.orm import declarative_base, sessionmaker
 from sqlalchemy.pool import NullPool
 
@@ -47,6 +47,21 @@ class Album(Base):
     name = Column(String)
     artist_names = Column(Text)
     songs_list = Column(Text)
+
+
+class AudioFeatures(Base):
+    __tablename__ = "audio_features"
+
+    song_id = Column(String, primary_key=True)  # FK to songs
+    danceability = Column(Float)
+    energy = Column(Float)
+    valence = Column(Float)
+    tempo = Column(Float)
+    acousticness = Column(Float)
+    instrumentalness = Column(Float)
+    speechiness = Column(Float)
+    liveness = Column(Float)
+
 
 def init_db():
     Base.metadata.create_all(engine)
