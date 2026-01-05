@@ -93,7 +93,7 @@ if __name__ == '__main__':
     # features = sp.audio_features([song_id])[0]
     # print(features)
 
-    print(sp.audio_features(["7FCfMXYTIiQ9b4hDYs4Iol"]))
+    # print(sp.audio_features(["7FCfMXYTIiQ9b4hDYs4Iol"]))
 
     # sp.audi
     # artists = sp.current_user_recently_played(limit=1)['items'][0]['track']['album']
@@ -106,3 +106,4 @@ if __name__ == '__main__':
 
     # a= artist.keys()
     # print(list(a))
+    print('use `py main.py` ')
